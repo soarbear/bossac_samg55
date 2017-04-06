@@ -29,6 +29,7 @@ INSTALLDIR=install
 # Determine OS
 #
 OS:=$(shell uname -s | cut -c -7)
+OS=MINGW32
 
 #
 # Windows rules
@@ -36,7 +37,7 @@ OS:=$(shell uname -s | cut -c -7)
 ifeq ($(OS),MINGW32)
 EXE=.exe
 COMMON_SRCS+=WinSerialPort.cpp WinPortFactory.cpp
-COMMON_LDFLAGS=-Wl,--enable-auto-import -static -static-libstdc++ -static-libgcc
+COMMON_LDFLAGS=-Wl,--enable-auto-import -static -static-libstdc++ -static-libgcc -Lc:\mingw32\opt\lib
 COMMON_LIBS=-ltermcap -Wl,--as-needed -lsetupapi
 BOSSA_RC=BossaRes.rc
 WIXDIR="C:\Program Files (x86)\WiX Toolset v3.10\bin"

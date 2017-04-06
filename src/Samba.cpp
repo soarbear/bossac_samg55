@@ -167,6 +167,11 @@ Samba::init()
         // Check for SAM4 architecture
         if (arch >= 0x88 && arch <= 0x8a)
             return true;
+
+		// SAM4E Architecture Identifier
+		if( arch == 0x3c )
+			return true;
+
         if (_debug)
             printf("Unsupported Cortex-M4 architecture\n");
     }
@@ -654,6 +659,28 @@ Samba::chipId()
     return cid;
 }
 
+uint32_t
+Samba::chipExtId(uint32_t chipId)
+{
+	uint32_t chipExtId = 0;
+
+    // are more lookup tables really needed?
+	// maybe I should just check the CID Extension Flag.
+	switch(chipId)
+	{
+	  //SAM4E
+	  case 0xa3cc0ce0:
+		chipExtId = readWord(0x400E0744);
+		break;
+	}
+
+	if(chipExtId)
+		printf( "CHIP ID Extension 0x%08x found\n", chipExtId ) ;
+
+	return chipExtId;
+}
+
+
 void
 Samba::reset(void)
 {
@@ -675,6 +702,11 @@ Samba::reset(void)
     case 0x285e0a60:
         writeWord(0x400E1A00, 0xA500000D);
         break;
+
+	// SAM4E
+	case 0xa3cc0ce0:
+		writeWord(0x400E1800,0xA500000D); // SAM4E Reset peripherals, processor and assert NRST
+		break;
 
     default:
         printf("Reset not supported for this CPU.\n");

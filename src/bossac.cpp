@@ -399,8 +399,9 @@ main(int argc, char* argv[])
 
         uint32_t chipId = samba.chipId();
         printf( "SAM-BA device 0x%08x found\n", chipId ) ;
+        uint32_t chipExtId = samba.chipExtId(chipId);
 
-        Flash::Ptr flash = flashFactory.create(samba, chipId);
+        Flash::Ptr flash = flashFactory.create(samba, chipId, chipExtId);
         if (flash.get() == NULL)
         {
             fprintf(stderr, "Flash for chip ID %08x is not supported\n", chipId);
