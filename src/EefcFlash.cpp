@@ -57,6 +57,33 @@
 #define EEFC_FCMD_CGPB  0xc
 #define EEFC_FCMD_GGPB  0xd
 
+//Start read unique identifier
+#define EEFC_FCMD_EPA	0x07
+
+//Start read unique identifier
+#define EEFC_FCMD_STUI	0x0E
+
+//Stop read unique identifier
+#define EEFC_FCMD_SPUI	0x0F
+
+//Get CALIB bit
+#define EEFC_FCMD_GCALB	0x10
+
+//Erase sector
+#define EEFC_FCMD_ES	0x11
+
+//Write user signature 
+#define EEFC_FCMD_WUS	0x12
+
+//Erase user signature
+#define EEFC_FCMD_EUS	0x13
+
+//Start read user signature
+#define EEFC_FCMD_STUS	0x14
+
+//Stop read user signature
+#define EEFC_FCMD_SPUS	0x15
+
 EefcFlash::EefcFlash(Samba& samba,
                      const std::string& name,
                      uint32_t addr,
@@ -88,8 +115,35 @@ EefcFlash::~EefcFlash()
 void
 EefcFlash::eraseAll()
 {
+/*
+	uint32_t erPage=40;
     waitFSR();
-    writeFCR0(EEFC_FCMD_EA, 0);
+    //writeFCR0(EEFC_FCMD_EA, 0);
+	printf("Erasing Sectors\n");
+	writeFCR0(EEFC_FCMD_ES, erPage);
+	waitFSR(); */
+	
+	printf("Erasing Sectors\n");
+	for(uint32_t i=32;i<2048;i+=128)
+	{
+		writeFCR0(EEFC_FCMD_ES, i);
+		waitFSR();
+	}
+/*
+	printf("Erasing Pages\n");
+	for(uint32_t i=32;i<129;i+=8)
+	{
+		writeFCR0(EEFC_FCMD_ES, i);
+		waitFSR();
+	} */
+/*
+	printf("Erasing Pages\n");
+	for(uint32_t i=31;i<129;i+=8)
+	{
+		writeFCR0(EEFC_FCMD_ES, i);
+		waitFSR();
+	}
+*/
     if (_planes == 2)
     {
         waitFSR();
@@ -263,13 +317,15 @@ EefcFlash::writePage(uint32_t page)
     _wordCopy.runv();
     if (_planes == 2 && page >= _pages / 2)
         writeFCR1(_eraseAuto ? EEFC_FCMD_EWP : EEFC_FCMD_WP, page - _pages / 2);
-    else
-        writeFCR0(_eraseAuto ? EEFC_FCMD_EWP : EEFC_FCMD_WP, page);
+    else {
+        writeFCR0(_eraseAuto ? EEFC_FCMD_WP : EEFC_FCMD_WP, page + 32);
+	}
 }
 
 void
 EefcFlash::readPage(uint32_t page, uint8_t* data)
 {
+	page += 32;
     if (page >= _pages)
         throw FlashPageError();
 
