@@ -135,11 +135,15 @@ Samba::init()
 
     _port->timeout(TIMEOUT_NORMAL);
 
-    if (_debug)
-        printf("chipId=%#08x\n", cid);
-
     uint8_t eproc = (cid >> 5) & 0x7;
     uint8_t arch = (cid >> 20) & 0xff;
+
+    if (_debug)
+	{
+        printf("chipId=%#08x\n", cid);
+        printf("eproc=%#08x\n", eproc);
+        printf("arch=%#08x\n", arch);
+	}
 
     // Check for ARM7TDMI processor
     if (eproc == 2)
@@ -170,6 +174,10 @@ Samba::init()
 
 		// SAM4E Architecture Identifier
 		if( arch == 0x3c )
+			return true;
+
+		// SAMG55 Architecture Identifier
+		if( arch == 0x45 )
 			return true;
 
         if (_debug)
