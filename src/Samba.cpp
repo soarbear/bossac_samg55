@@ -711,6 +711,12 @@ Samba::reset(void)
         writeWord(0x400E1A00, 0xA500000D);
         break;
 
+	//SAMG55J19
+	case 0x24570ae0:
+	case 0x24570ae1:
+		writeWord(0x400E1400, 0xA500000D);
+		break;
+
 	// SAM4E
 	case 0xa3cc0ce0:
 		writeWord(0x400E1800,0xA500000D); // SAM4E Reset peripherals, processor and assert NRST
