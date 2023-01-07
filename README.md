@@ -1,6 +1,6 @@
 # Description
 
-Firemware uploading tool based on BOSSA 1.8/Feynman version. Modification added to support Microchip ATSAMG55J19, [make install] on UBUNTU.
+Firemware uploading tool based on BOSSA 1.8/Feynman version. Modification added to support Microchip ATSAMG55J19, [make] on UBUNTU.
 
 # Environment
 
