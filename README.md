@@ -1,21 +1,37 @@
+# Description
+
+Firemware uploading tool based on BOSSA 1.8/Feynman version. Modification added to support Microchip ATSAMG55J19, [make install] on UBUNTU.
+
 # Environment
 
 UBUNTU 18.04 and above.
 
 # Make
+
 $sudo apt-get update
+
 $sudo apt-get install build-essential
+
 $sudo apt-get install libwxbase3.0-dev
+
 $sudo apt-get install libwxgtk3.0-gtk3-dev
+
 $sudo apt-get install libwxgtk3.0-dev
+
 $sudo apt-get install libreadline-dev
+
 $cd <folder to save bossac_samg55>
+
 $git clone https://github.com/soarbear/bossac_samg55
+
 $cd bossac_samg55
+
 $make clean
+
 $make bin/bossac -j4
 
 # Upload
+
 $bin/bossac -e -w -v -b -i --offset=0x2000 file_name.bin
 
 ---
