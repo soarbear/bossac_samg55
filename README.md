@@ -20,7 +20,7 @@ $sudo apt-get install libwxgtk3.0-dev
 
 $sudo apt-get install libreadline-dev
 
-$cd <folder to save bossac_samg55>
+$cd [folder to save bossac_samg55]
 
 $git clone https://github.com/soarbear/bossac_samg55
 
