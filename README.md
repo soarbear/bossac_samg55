@@ -1,6 +1,6 @@
 # Description
 
-soarbear /bossac_samg55 is a firmware uploading tool based on BOSSA 1.8/Feynman version. Modification added to support Microchip ATSAMG55J19, [make] on UBUNTU.
+soarbear / bossac_samg55 is a firmware uploading tool based on BOSSA 1.8 / Feynman version. Modification added to support Microchip ATSAMG55J19, [make] on UBUNTU.
 
 # Environment
 
