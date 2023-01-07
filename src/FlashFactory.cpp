@@ -252,7 +252,8 @@ FlashFactory::create(Samba& samba, uint32_t chipId, uint32_t extID)
 		// SAMG55J19
 		case 0x24570ae0:
 		case 0x24570ae1:
-			flash = new EefcFlash(samba, "ATSAMG55J19", 0x00400000, 1024, 512, 1, 64, 0x20001000, 0x20001000, 0x400e0a00, false);
+			//flash = new EefcFlash(samba, "ATSAMG55J19", 0x00400000, 1024, 512, 1, 64, 0x20001000, 0x20001000, 0x400e0a00, false);
+			flash = new EefcFlash(samba, "ATSAMG55J19", 0x00400000, 1024, 512, 1, 64, 0x20006000, 0x20006000, 0x400e0a00, true);
 			break;
 
 		// SAM4E

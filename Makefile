@@ -4,7 +4,8 @@
 # Version
 #
 VERSION=1.8
-WXVERSION=3.1
+#WXVERSION=3.1
+WXVERSION=3.0
 
 #
 # Source files
@@ -29,7 +30,7 @@ INSTALLDIR=install
 # Determine OS
 #
 OS:=$(shell uname -s | cut -c -7)
-OS=MINGW32
+#OS=MINGW32
 
 #
 # Windows rules
